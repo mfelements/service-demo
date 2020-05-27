@@ -11,7 +11,7 @@ function getRequestData(req){
 }
 
 const headers = {
-    'Access-Control-Allow-Origin': 'http://mfelements.github.io',
+    'Access-Control-Allow-Origin': 'https://mfelements.github.io',
     'Access-Control-Allow-Headers': 'content-type',
 };
 

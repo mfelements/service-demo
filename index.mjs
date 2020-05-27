@@ -41,13 +41,14 @@ const pages = {
                     action: 'getWatchesCount',
                     args: ['main']
                 },
-                default: 0,
+                default: [ 0 ],
+                interval: 5000,
             },
             {
                 type: 'editable',
                 id: 'watchesCountEditable',
                 template: 'вручную обновляемых (нажмите кнопку, чтобы обновить): %d',
-                default: 0,
+                default: [ 0 ],
             },
         ]
     },
@@ -80,9 +81,9 @@ class API extends APIProto{
         if(id) return {
             type: 'edit',
             id,
-            content: [ watches ],
+            data: [ watches ],
         };
-        else return watches
+        else return [ watches ]
     }
     throwServerError(){
         throw new Error('Error description from server')

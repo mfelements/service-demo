@@ -8,30 +8,32 @@ const pages = {
                 type: 'block',
                 childs: [
                     'Эта страница сгенерирована сервером',
-                    {
-                        type: 'button',
-                        onClick: {
-                            action: 'getPage',
-                            args: ['second']
+                    [ // блок для группировки элементов внутри в строку
+                        {
+                            type: 'button',
+                            onClick: {
+                                action: 'getPage',
+                                args: ['second']
+                            },
+                            text: '➡️ Перейти на следующую страницу',
                         },
-                        text: '➡️ Перейти на следующую страницу',
-                    },
-                    {
-                        type: 'button',
-                        onClick: {
-                            action: 'getWatchesCount',
-                            args: ['main', 'watchesCountEditable']
+                        {
+                            type: 'button',
+                            onClick: {
+                                action: 'getWatchesCount',
+                                args: ['main', 'watchesCountEditable']
+                            },
+                            text: '🔄 Обновить кол-во просмотров',
                         },
-                        text: '🔄 Обновить кол-во просмотров',
-                    },
-                    {
-                        type: 'button',
-                        onClick: {
-                            action: 'throwServerError',
+                        {
+                            type: 'button',
+                            onClick: {
+                                action: 'throwServerError',
+                            },
+                            text: '🛑 Вызвать ошибку на сервере',
                         },
-                        text: '🛑 Вызвать ошибку на сервере',
-                    },
-                ]
+                    ],
+                ],
             },
             'Кол-во просмотров этой страницы за текущую сессию сервера: ',
             {

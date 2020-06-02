@@ -20,14 +20,6 @@ const pages = {
                         {
                             type: 'button',
                             onClick: {
-                                action: 'getWatchesCount',
-                                args: ['main', 'watchesCountEditable']
-                            },
-                            text: '🔄 Обновить кол-во просмотров',
-                        },
-                        {
-                            type: 'button',
-                            onClick: {
                                 action: 'throwServerError',
                             },
                             text: '🛑 Вызвать ошибку на сервере',
@@ -42,23 +34,26 @@ const pages = {
                     },
                 ],
             },
-            'Кол-во просмотров этой страницы за текущую сессию сервера: ',
-            {
-                type: 'dynamic',
-                template: 'автоматически обновляемых (каждые 5с.): %d; ',
-                update: {
-                    action: 'getWatchesCount',
-                    args: ['main']
+            [
+                'Кол-во просмотров этой страницы (автоматически обновляемых каждые 5с.): ',
+                {
+                    type: 'dynamic',
+                    update: {
+                        action: 'getWatchesCount',
+                        args: ['main']
+                    },
+                    default: [ 0 ],
+                    interval: 5000,
+                }
+            ],
+            [
+                'Кол-во кликов по кнопке (нажмите, чтобы обновить): ',
+                {
+                    type: 'editable',
+                    id: 'clickCountEditable',
+                    default: [],
                 },
-                default: [ 0 ],
-                interval: 5000,
-            },
-            {
-                type: 'editable',
-                id: 'watchesCountEditable',
-                template: 'вручную обновляемых (нажмите кнопку, чтобы обновить): %d',
-                default: [ 0 ],
-            },
+            ],
         ]
     },
     second: {
@@ -77,22 +72,46 @@ const pages = {
     },
 }
 
-const pageWatches = {};
+const pageWatches = {},
+    btnClicks = {},
+    clickButtonTpl = pages.main.childs[2][1];
 
 class API extends APIProto{
+    constructor(port){
+        super(port);
+        clickButtonTpl.default = this.updateClicksButton('clickCountEditable').data;
+    }
     getPage(name){
         if(!pageWatches[name]) pageWatches[name] = 1;
         else pageWatches[name]++;
         return pages[name]
     }
-    getWatchesCount(page, id){
+    getWatchesCount(page){
         const watches = pageWatches[page] || 0;
-        if(id) return {
+        return [ watches ]
+    }
+    btnClick(id){
+        if(!btnClicks[id]) btnClicks[id] = 1;
+        else btnClicks[id]++;
+        return this.updateClicksButton(id)
+    }
+    updateClicksButton(id){
+        const data = [
+            {
+                type: 'button',
+                onClick: {
+                    action: 'btnClick',
+                    args: [ id ]
+                },
+                text: `🔄 Кликов: ${btnClicks[id] || 0}`,
+            },
+        ];
+        clickButtonTpl.default = data;
+        return {
             type: 'edit',
             id,
-            data: [ watches ],
-        };
-        else return [ watches ]
+            data,
+        }
     }
     throwServerError(){
         throw new Error('Error description from server')

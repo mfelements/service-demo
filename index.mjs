@@ -33,6 +33,13 @@ const pages = {
                             text: '🛑 Вызвать ошибку на сервере',
                         },
                     ],
+                    {
+                        type: 'image',
+                        src: 'https://png.pngtree.com/thumb_back/fw800/back_our/20190617/ourmid/pngtree-blue-tech-abstract-background-image_128874.jpg',
+                        ratio: '1:1',
+                        width: '40%',
+                        round: true,
+                    },
                 ],
             },
             'Кол-во просмотров этой страницы за текущую сессию сервера: ',

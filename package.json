@@ -2,6 +2,10 @@
     "scripts": {
         "runner": "node --experimental-json-modules --experimental-wasm-modules --loader ./loader.mjs",
         "start": "yarn runner index.mjs",
-        "inspect": "yarn runner --inspect=0.0.0.0:9229 index.mjs"
+        "inspect": "yarn runner --inspect=0.0.0.0:9229 index.mjs",
+        "dev": "nodemon -e js,mjs --exec yarn inspect"
+    },
+    "dependencies": {
+        "nodemon": "^2.0.4"
     }
 }

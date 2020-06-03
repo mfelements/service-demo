@@ -3,10 +3,10 @@ import APIProto from './API.mjs'
 const pages = {
     main: {
         type: 'page',
-        childs: [
+        children: [
             {
                 type: 'block',
-                childs: [
+                children: [
                     'Эта страница сгенерирована сервером',
                     [ // блок для группировки элементов внутри в строку
                         {
@@ -58,7 +58,7 @@ const pages = {
     },
     second: {
         type: 'page',
-        childs: [
+        children: [
             'А вот эта страничка уже должна быть отрендерена вне блока',
             {
                 type: 'button',
@@ -74,7 +74,7 @@ const pages = {
 
 const pageWatches = {},
     btnClicks = {},
-    clickButtonTpl = pages.main.childs[2][1];
+    clickButtonTpl = pages.main.children[2][1];
 
 class API extends APIProto{
     constructor(port){

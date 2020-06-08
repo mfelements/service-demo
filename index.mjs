@@ -81,6 +81,9 @@ class API extends APIProto{
         super(port);
         clickButtonTpl.default = this.updateClicksButton('clickCountEditable').data;
     }
+    getIndex(){
+        return this.getPage('main')
+    }
     getPage(name){
         if(!pageWatches[name]) pageWatches[name] = 1;
         else pageWatches[name]++;

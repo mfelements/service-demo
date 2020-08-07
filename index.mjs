@@ -3,6 +3,7 @@ import APIProto from './API.mjs'
 const pages = {
     main: {
         type: 'page',
+        title: 'First',
         children: [
             {
                 type: 'block',
@@ -31,6 +32,30 @@ const pages = {
                         ratio: '1:1',
                         width: '40%',
                         round: true,
+                    },
+                    'А дальше - диалоговое окно',
+                    {
+                        type: 'dialog',
+                        text: 'Хотите перейти на другую страницу?',
+                        btnText: 'Открыть',
+                        buttons: [
+                            {
+                                text: '✅ Да',
+                                onClick: {
+                                    action: 'getPage',
+                                    args: ['second']
+                                }
+                            },
+                            {
+                                text: '❌ Не',
+                            },
+                            {
+                                text: '🛑 Вызвать ошибку',
+                                onClick: {
+                                    action: 'throwServerError',
+                                },
+                            },
+                        ],
                     },
                 ],
             },

@@ -11,8 +11,7 @@ function getRequestData(req){
 }
 
 const headers = {
-    'Access-Control-Allow-Origin': 'https://mfelements.github.io',
-    'Access-Control-Allow-Headers': 'content-type',
+    'Access-Control-Allow-Origin': '*',
 };
 
 export default class API{
@@ -20,7 +19,7 @@ export default class API{
         createServer(async (req, res) => {
             const method = decodeURIComponent(req.url.slice(1));
             if(typeof this[method] !== 'function'){
-                res.writeHead(404, headers);
+                res.writeHead(200, headers);
                 res.end(JSON.stringify({
                     error: `Method ${method} not implemented`
                 }))
